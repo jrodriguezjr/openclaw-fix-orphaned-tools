@@ -42,7 +42,7 @@ ln -s "$(pwd)/fix_orphaned_tools.sh" /usr/local/bin/fix-orphaned-tools
 Always start here. Scans session files and reports orphaned tool calls without modifying anything:
 
 ```bash
-bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/ellie/sessions
+bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/<agent>/sessions
 ```
 
 ### Fix Orphaned Tool Calls
@@ -50,7 +50,7 @@ bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/ellie/sessions
 Injects synthetic `toolResult` entries after each orphaned `toolCall`, restoring the expected alternating sequence:
 
 ```bash
-bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/ellie/sessions --fix
+bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/<agent>/sessions --fix
 ```
 
 Backups are created automatically before any modifications (`.bak.<timestamp>` files).
@@ -60,7 +60,7 @@ Backups are created automatically before any modifications (`.bak.<timestamp>` f
 When the API error references a specific call ID, use `--find-id` to locate it. Supports partial/fuzzy matching:
 
 ```bash
-bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/ellie/sessions --find-id call9145
+bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/<agent>/sessions --find-id call9145
 ```
 
 This is useful when `--fix` patches orphans but the error persists — the problematic call ID may be in a format the standard scan doesn't catch (compound IDs, transformed IDs, etc.).
@@ -70,7 +70,7 @@ This is useful when `--fix` patches orphans but the error persists — the probl
 When patching doesn't work or a session file has grown too large, truncate it to keep only the most recent N lines:
 
 ```bash
-bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/ellie/sessions --truncate 500
+bash fix_orphaned_tools.sh --dir ~/.openclaw/agents/<agent>/sessions --truncate 500
 ```
 
 This drops old conversation history but guarantees a clean session.
